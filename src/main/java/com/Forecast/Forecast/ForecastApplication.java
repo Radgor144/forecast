@@ -19,10 +19,11 @@ public class ForecastApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		String include = "hours,days";
 		String key = "AM9ZTRLEYSXEF4YT5E79H7GBJ";
 		String city = "Krakow";
+		System.out.println("xyz");
 		WeatherData weatherData = weatherClient.getWeatherData(include, key, city);
 		System.out.println(weatherData);
 
