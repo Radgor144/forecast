@@ -9,6 +9,7 @@ public interface WeatherClient {
 
     @GetMapping("/VisualCrossingWebServices/rest/services/timeline/{city}")
     WeatherData getWeatherData(
+            @RequestParam("unitGroup") String unitGroup,
             @RequestParam("include") String include,
             @RequestParam("key") String key,
             @RequestParam("city") String city

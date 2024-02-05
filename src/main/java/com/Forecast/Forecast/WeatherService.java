@@ -17,7 +17,9 @@ public class WeatherService {
     }
 
     public WeatherData getWeatherData(String city) {
-        String include = "hours,days";
-        return weatherClient.getWeatherData(include, weatherClientApiKey, city);
+        String include = "metric,hours,days";
+        String unitGroup = "metric"; // "metric", "us", "uk"
+
+        return weatherClient.getWeatherData(unitGroup, include, weatherClientApiKey, city);
     }
 }
