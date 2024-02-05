@@ -5,6 +5,3 @@ spring:
         config:
           weather-client:
             url: https://weather.visualcrossing.com
-weather:
-  client:
-    api-key: AM9ZTRLEYSXEF4YT5E79H7GBJ
