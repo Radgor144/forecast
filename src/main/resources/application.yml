@@ -7,4 +7,4 @@ spring:
             url: https://weather.visualcrossing.com
 weather:
   client:
-    api-key: changeMe
+    api-key: AM9ZTRLEYSXEF4YT5E79H7GBJ
