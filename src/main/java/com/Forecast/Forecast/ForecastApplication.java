@@ -3,6 +3,7 @@ package com.Forecast.Forecast;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+
 @SpringBootApplication
 @EnableFeignClients
 public class ForecastApplication {
@@ -11,7 +12,4 @@ public class ForecastApplication {
 		SpringApplication.run(ForecastApplication.class, args);
 
 	}
-
-
-
 }
