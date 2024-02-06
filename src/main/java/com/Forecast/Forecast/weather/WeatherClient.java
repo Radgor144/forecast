@@ -1,5 +1,6 @@
-package com.Forecast.Forecast;
+package com.Forecast.Forecast.weather;
 
+import com.Forecast.Forecast.weather.data.WeatherData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +10,7 @@ public interface WeatherClient {
 
     @GetMapping("/VisualCrossingWebServices/rest/services/timeline/{city}")
     WeatherData getWeatherData(
-            @RequestParam("unitGroup") String unitGroup,
+            @RequestParam("unitGroup") UnitGroup unitGroup,
             @RequestParam("include") String include,
             @RequestParam("key") String key,
             @RequestParam("city") String city

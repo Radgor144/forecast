@@ -1,4 +1,4 @@
-package com.Forecast.Forecast;
+package com.Forecast.Forecast.weather.data;
 
 import java.time.LocalDate;
 import java.util.List;
