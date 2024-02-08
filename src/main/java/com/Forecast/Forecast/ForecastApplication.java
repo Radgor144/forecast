@@ -12,4 +12,6 @@ public class ForecastApplication {
 		SpringApplication.run(ForecastApplication.class, args);
 
 	}
+
+	String xddd;
 }
