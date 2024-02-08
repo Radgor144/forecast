@@ -15,7 +15,7 @@ public class WeatherService {
     private final String weatherClientApiKey;
 
     public WeatherService(WeatherClient weatherClient,
-                          @Value("${weather.client.api-key:}") String weatherClientApiKey) {
+                          @Value("${weather.client.api-key}") String weatherClientApiKey) {
         this.weatherClient = weatherClient;
         this.weatherClientApiKey = weatherClientApiKey;
     }
