@@ -13,5 +13,5 @@ public class ForecastApplication {
 
 	}
 
-	String xddd;
+
 }
