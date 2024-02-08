@@ -10,8 +10,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(WeatherDataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleWeatherDataNotFoundException(WeatherDataNotFoundException ex) {
-        return ex.getMessage();
+    public ErrorResponse handleWeatherDataNotFoundException(WeatherDataNotFoundException ex) {
+        return new ErrorResponse(ex.getMessage(), "Weather data not found", HttpStatus.NOT_FOUND.value());
     }
 }
 
