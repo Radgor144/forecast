@@ -1,5 +1,6 @@
-package com.Forecast.Forecast.weather;
+package com.Forecast.Forecast.weather.data;
 
+import com.Forecast.Forecast.weather.data.UnitGroup;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
