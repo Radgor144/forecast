@@ -5,3 +5,7 @@ spring:
         config:
           weather-client:
             url: https://weather.visualcrossing.com
+
+weather:
+  client:
+    api-key: changeMe
