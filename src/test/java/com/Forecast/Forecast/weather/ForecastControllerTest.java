@@ -38,7 +38,7 @@ class ForecastControllerTest {
 //      given
         var weatherData = WeatherDataFixture.defaultWeatherData("Kraków, Woj. Małopolskie, Polska");
         //  TODO: naprawić url, city ma być tylko w jednym miejscu
-        stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/Krakow?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY&city=Krakow"))
+        stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/Krakow?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
