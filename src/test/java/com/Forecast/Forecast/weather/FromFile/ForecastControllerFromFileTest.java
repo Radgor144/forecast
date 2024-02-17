@@ -1,13 +1,10 @@
-package com.Forecast.Forecast.weather;
+package com.Forecast.Forecast.weather.FromFile;
 
 import com.Forecast.Forecast.weather.data.WeatherData;
-import com.Forecast.Forecast.weather.fixtures.WeatherDataFixture;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +13,8 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
-import java.util.stream.Stream;
+import java.io.File;
+import java.io.IOException;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -29,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWireMock(port = 0)
 @AutoConfigureWebTestClient
-class ForecastControllerTest {
+class ForecastControllerFromFileTest {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -37,20 +35,27 @@ class ForecastControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-//  TODO: napisać test parametryczny (zrobione)
-    static Stream<Arguments> provideAddressesAndCities() {
-        return Stream.of(
-                Arguments.of("Kraków, Woj. Małopolskie, Polska", "Krakow"),
-                Arguments.of("Szczecin, Woj. Zachodniopomorskie, Polska", "Szczecin"),
-                Arguments.of("Poznań, Woj. Wielkopolskie, Polska", "Poznan")
-        );
+    WeatherData getJson() {
+        WeatherData weatherData = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        try {
+            weatherData = objectMapper.readValue(new File("src/test/resources/krakow.json"), WeatherData.class);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return weatherData;
+
     }
 
-    @ParameterizedTest
-    @MethodSource("provideAddressesAndCities")
-    void happyPath(String address, String city) throws JsonProcessingException {
-//      given
-        var weatherData = WeatherDataFixture.defaultWeatherData(address);
+
+    @Test
+    void happyPath() throws IOException {
+        // given
+        WeatherData weatherData = getJson();
+        String city = "krakow";
 
         stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
                 .willReturn(aResponse()
@@ -58,12 +63,14 @@ class ForecastControllerTest {
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                         .withBody(objectMapper.writeValueAsString(weatherData)))
         );
-//      when
+
+        // when
         var result = webTestClient
                 .get()
                 .uri("/forecast/" + city)
                 .exchange();
-//      then
+
+        // then
         result
                 .expectBody(WeatherData.class)
                 .consumeWith(response -> {
@@ -71,5 +78,7 @@ class ForecastControllerTest {
                             response.getStatus().isSameCodeAs(HttpStatusCode.valueOf(200));
                         }
                 );
+
     }
+
 }
