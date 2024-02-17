@@ -4,7 +4,8 @@ import com.Forecast.Forecast.weather.data.WeatherData;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -35,12 +37,11 @@ class ForecastControllerFromFileTest {
     @Autowired
     private WebTestClient webTestClient;
 
-    WeatherData getJson() {
+    WeatherData getJson(String city) {
         WeatherData weatherData = null;
-        ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         try {
-            weatherData = objectMapper.readValue(new File("src/test/resources/krakow.json"), WeatherData.class);
+            weatherData = objectMapper.readValue(new File("src/test/resources/" + city + ".json"), WeatherData.class);
         } catch (JsonMappingException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -50,12 +51,15 @@ class ForecastControllerFromFileTest {
 
     }
 
+    private static Stream<String> provideCities() {
+        return Stream.of("krakow", "szczecin", "poznan");
+    }
 
-    @Test
-    void happyPath() throws IOException {
+    @ParameterizedTest
+    @MethodSource("provideCities")
+    void happyPath(String city) throws IOException {
         // given
-        WeatherData weatherData = getJson();
-        String city = "krakow";
+        WeatherData weatherData = getJson(city);
 
         stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
                 .willReturn(aResponse()
