@@ -37,7 +37,6 @@ class ForecastControllerTest {
     @Autowired
     private WebTestClient webTestClient;
 
-//  TODO: napisać test parametryczny (zrobione)
     static Stream<Arguments> provideAddressesAndCities() {
         return Stream.of(
                 Arguments.of("Kraków, Woj. Małopolskie, Polska", "Krakow"),
