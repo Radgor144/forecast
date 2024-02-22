@@ -13,6 +13,7 @@ public class GlobalExceptionHandler {
     public ErrorResponse handleWeatherDataNotFoundException(WeatherDataNotFoundException ex) {
         return new ErrorResponse(ex.getMessage(), "Weather data not found", HttpStatus.NOT_FOUND.value());
     }
+
 }
 
 
