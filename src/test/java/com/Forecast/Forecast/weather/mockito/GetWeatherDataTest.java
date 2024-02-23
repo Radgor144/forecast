@@ -1,40 +1,42 @@
-package com.Forecast.Forecast.weather;
+package com.Forecast.Forecast.weather.mockito;
 
+import com.Forecast.Forecast.weather.WeatherService;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import com.Forecast.Forecast.weather.fixtures.WeatherDataFixture;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.stream.Stream;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(properties =
         "spring.cloud.openfeign.client.config.weather-client.url=http://localhost:${wiremock.server.port}",
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWireMock(port = 0)
 @AutoConfigureWebTestClient
-class ForecastControllerTest {
+public class GetWeatherDataTest {
+
+    @MockBean
+    private WeatherService weatherService;
+
+    @Autowired
+    private WebTestClient webTestClient;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private WebTestClient webTestClient;
+
 
     static Stream<Arguments> provideAddressesAndCities() {
         return Stream.of(
@@ -46,28 +48,23 @@ class ForecastControllerTest {
 
     @ParameterizedTest
     @MethodSource("provideAddressesAndCities")
-    void happyPath(String address, String city) throws JsonProcessingException {
-//      given
+    public void ServiceTest(String address, String city) {
+        // given
         var weatherData = WeatherDataFixture.defaultWeatherData(address);
+        Mockito.when(weatherService.getWeatherData(city)).thenReturn(weatherData);
 
-        stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                        .withBody(objectMapper.writeValueAsString(weatherData)))
-        );
-//      when
+        // when
         var result = webTestClient
                 .get()
                 .uri("/forecast/" + city)
                 .exchange();
-//      then
-        result
+
+        // then
+        result.expectStatus().isOk()
                 .expectBody(WeatherData.class)
-                .consumeWith(response -> {
-                            assertEquals(weatherData, response.getResponseBody());
-                            response.getStatus().isSameCodeAs(HttpStatusCode.valueOf(200));
-                        }
-                );
+                .value(returnedWeatherData -> {
+                    assertEquals(weatherData, returnedWeatherData);
+                });
     }
 }
+

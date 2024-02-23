@@ -34,10 +34,10 @@ public class ForecastControllerMockitoTest {
     private WeatherService weatherService;
 
     private AutoCloseable closeable;
-    @BeforeAll
-    public void openMocks() {
-        closeable = MockitoAnnotations.openMocks(this);
-    }
+//    @BeforeAll
+//    public void openMocks() {
+//        closeable = MockitoAnnotations.openMocks(this);
+//    }
 
     @AfterAll
     public void releaseMocks() throws Exception {
