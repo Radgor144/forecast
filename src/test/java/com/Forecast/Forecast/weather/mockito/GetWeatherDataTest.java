@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -50,8 +52,8 @@ public class GetWeatherDataTest {
     @MethodSource("provideAddressesAndCities")
     public void ServiceTest(String address, String city) {
         // given
-        var weatherData = WeatherDataFixture.defaultWeatherData(address);
-        Mockito.when(weatherService.getWeatherData(city)).thenReturn(weatherData);
+        var expectedWeatherData = WeatherDataFixture.defaultWeatherData(address);
+        Mockito.when(weatherService.getWeatherData(city)).thenReturn(expectedWeatherData);
 
         // when
         var result = webTestClient
@@ -60,10 +62,15 @@ public class GetWeatherDataTest {
                 .exchange();
 
         // then
-        result.expectStatus().isOk()
+        result
                 .expectBody(WeatherData.class)
-                .value(returnedWeatherData -> {
-                    assertEquals(weatherData, returnedWeatherData);
+                .consumeWith(response -> {
+                    WeatherData returnedWeatherData = response.getResponseBody();
+                    assertEquals(expectedWeatherData, returnedWeatherData, "Returned WeatherData should match expected");
+                    assertEquals(HttpStatus.OK.value(), response.getStatus().value(), "HTTP status should be OK");
+
+                    // Wypisanie danych
+                    System.out.println("Returned WeatherData: " + returnedWeatherData);
                 });
     }
 }
