@@ -23,6 +23,7 @@ public class WeatherService {
     }
 
     public WeatherData getWeatherData(String city) {
+//        TODO: obsługa 503 i 408 jako 502 BAD GATEWAY
         return weatherClient.getWeatherData(UNIT_GROUP, INCLUDE, weatherClientApiKey, city);
     }
 }
