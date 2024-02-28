@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends RuntimeException {
 
     @ExceptionHandler(WeatherDataNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleWeatherDataNotFoundException(WeatherDataNotFoundException ex) {
-        return new ErrorResponse(ex.getMessage(), "Weather data not found", HttpStatus.NOT_FOUND.value());
+        return new ErrorResponse(ex.getMessage(), "City not found", HttpStatus.NOT_FOUND.value());
     }
 
 }

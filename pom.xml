@@ -17,6 +17,12 @@
 		<java.version>21</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
 		<lombok.version>1.18.30</lombok.version>
+		<springdoc.version>2.3.0</springdoc.version>
+		<spring-cloud-starter.version>4.1.1</spring-cloud-starter.version>
+		<jackson.version>2.16.1</jackson.version>
+		<mockito.version>5.10.0</mockito.version>
+		<openfeign.version>4.1.0</openfeign.version>
+		<feign-core.version>13.2.1</feign-core.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -26,6 +32,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>${openfeign.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -37,8 +44,17 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-<!--			TODO: do properties-->
-			<version>2.3.0</version>
+			<version>${springdoc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.openfeign</groupId>
+			<artifactId>feign-core</artifactId>
+			<version>${feign-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
 		</dependency>
 
 		<!-- TEST DEPENDENCIES -->
@@ -51,8 +67,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
-			<!--		TODO: to properties	-->
-			<version>4.1.1</version>
+			<version>${spring-cloud-starter.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -64,26 +79,20 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<!--		TODO: to properties	-->
-
-			<version>2.16.1</version>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-			<!--		TODO: to properties	-->
-
-			<version>2.16.1</version>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
-			<!--		TODO: to properties	-->
-
-			<version>5.10.0</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -102,14 +111,6 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<!-- https://mvnrepository.com/artifact/io.quarkus/quarkus-junit5 -->
-<!--		TODO: remove unused dependencies	-->
-			<dependency>
-				<groupId>io.quarkus</groupId>
-				<artifactId>quarkus-junit5</artifactId>
-				<version>3.7.1</version>
-				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
