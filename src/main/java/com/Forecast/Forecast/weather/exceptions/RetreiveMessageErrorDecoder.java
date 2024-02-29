@@ -13,10 +13,18 @@ public class RetreiveMessageErrorDecoder implements ErrorDecoder {
     public Exception decode(String methodKey, Response response) {
         log.info("Error Decoder: {}, {}", methodKey, response);
 
-        if(methodKey.contains("getWeatherData")){
-            return new WeatherDataNotFoundException("Weather data not found");
+        switch (response.status()) {
+            case 400:
+            case 404:
+                return new WeatherDataNotFoundException("Weather data not found");
+            case 408:
+            case 503:
+                return new BadGatewayException("Bad Gateway");
+            default:
+                return new UnknownException();
         }
-        return new UnknownException();
     }
+
+
 }
 
