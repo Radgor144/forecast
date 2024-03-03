@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "weather-client")
+@FeignClient(name = "weather-client", configuration = WeatherClientConfiguration.class)
 public interface WeatherClient {
 
     @GetMapping("/VisualCrossingWebServices/rest/services/timeline/{city}")

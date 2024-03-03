@@ -28,7 +28,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 @RunWith(SpringRunner.class)
 public class ErrorTest {
 
-    public static final String LINK = "/VisualCrossingWebServices/rest/services/timeline/krakow?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
+    public static final String URL = "/VisualCrossingWebServices/rest/services/timeline/krakow?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
     @Autowired
     private WebTestClient webTestClient;
 
@@ -38,10 +38,9 @@ public class ErrorTest {
     @Test
     public void get404Error() throws Exception {
         //given
-        ObjectMapper objectMapper = new ObjectMapper();
         var errorResponse = new ErrorResponse("Weather data not found", "City not found", HttpStatus.NOT_FOUND.value());
         log.info("Error Decoder: {}", objectMapper.writeValueAsString(errorResponse));
-        stubFor(get(urlEqualTo(LINK))
+        stubFor(get(urlEqualTo(URL))
                 .willReturn(aResponse()
                         .withStatus(HttpStatus.NOT_FOUND.value())
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
@@ -65,10 +64,9 @@ public class ErrorTest {
     @Test
     public void get503Error() throws Exception {
         // given
-        ObjectMapper objectMapper = new ObjectMapper();
         var errorResponse = new ErrorResponse("Bad Gateway", "City not found", HttpStatus.SERVICE_UNAVAILABLE.value());
         log.info("Error Decoder: {}", objectMapper.writeValueAsString(errorResponse));
-        stubFor(get(urlEqualTo(LINK))
+        stubFor(get(urlEqualTo(URL))
                 .willReturn(aResponse()
                         .withStatus(HttpStatus.SERVICE_UNAVAILABLE.value())
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)

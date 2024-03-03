@@ -1,6 +1,7 @@
 package com.Forecast.Forecast.weather;
 
 import com.Forecast.Forecast.weather.data.WeatherData;
+import com.Forecast.Forecast.weather.exceptions.WeatherDataNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +23,6 @@ public class ForecastController {
 //   TODO: ogarnąć, żeby ten validator działał na poziomie controllera pusty string podany w paramaetrze wywowałania z postamana
 //powinien byc odrzucany na wyższym poziomie
     public WeatherData getWeatherData(@PathVariable @Valid @NotBlank String city) {
-        return weatherService.getWeatherData(city);
-    }
+            return weatherService.getWeatherData(city);
+        }
 }
