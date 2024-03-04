@@ -28,7 +28,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 @RunWith(SpringRunner.class)
 public class ErrorTest {
 
-    public static final String URL = "/VisualCrossingWebServices/rest/services/timeline/krakow?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
+    public static final String URL = "/VisualCrossingWebServices/rest/services/timeline/XXX?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
     @Autowired
     private WebTestClient webTestClient;
 
@@ -36,23 +36,25 @@ public class ErrorTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void get404Error() throws Exception {
+    public void get400Error() throws Exception {
         //given
-        var errorResponse = new ErrorResponse("Weather data not found", "City not found", HttpStatus.NOT_FOUND.value());
+        final int HTTPCode = 400;
+        ErrorResponse errorResponse = new ErrorResponse("Error while connecting to weather client API.",
+                "Bad API Request:Invalid location parameter value.", HTTPCode);
         log.info("Error Decoder: {}", objectMapper.writeValueAsString(errorResponse));
         stubFor(get(urlEqualTo(URL))
                 .willReturn(aResponse()
-                        .withStatus(HttpStatus.NOT_FOUND.value())
+                        .withStatus(400)
                         .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
                         .withBody(objectMapper.writeValueAsString(errorResponse)))
-                );
+        );
 
         //when
         var result = webTestClient
                 .get()
-                .uri("/forecast/krakow")
+                .uri("/forecast/XXX")
                 .exchange()
-                .expectStatus().isNotFound()
+                .expectStatus().isEqualTo(HTTPCode)
                 .expectBody(ErrorResponse.class);
 
 
@@ -80,5 +82,4 @@ public class ErrorTest {
                 .exchange()
                 .expectStatus().is5xxServerError();
     }
-
 }

@@ -1,7 +1,6 @@
 package com.Forecast.Forecast.weather;
 
 import com.Forecast.Forecast.weather.data.WeatherData;
-import com.Forecast.Forecast.weather.exceptions.WeatherDataNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
