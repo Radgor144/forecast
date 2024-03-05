@@ -14,6 +14,12 @@ public class GlobalExceptionHandler extends RuntimeException {
         // entitybody trzeba zwrocic, zeby byl kod taki sam (teraz jest 200)
         return ResponseEntity.status(ex.getHttpStatus()).body(new ErrorResponse("Error while connecting to weather client API.", ex.getMessage(), ex.getHttpStatus()));
     }
+    @ExceptionHandler(BlankCityName.class)
+    public ResponseEntity<ErrorResponse> handleBlankCityName(BlankCityName ex) {
+        log.error("Error while user entered empty city name", ex);
+        // entitybody trzeba zwrocic, zeby byl kod taki sam (teraz jest 200)
+        return ResponseEntity.status(ex.getHttpStatus()).body(new ErrorResponse("Error while user entered empty city name", ex.getMessage(), ex.getHttpStatus()));
+    }
 }
 
 
