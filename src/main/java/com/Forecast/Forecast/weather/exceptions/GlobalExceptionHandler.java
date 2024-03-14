@@ -1,5 +1,6 @@
 package com.Forecast.Forecast.weather.exceptions;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,11 +15,10 @@ public class GlobalExceptionHandler extends RuntimeException {
         // entitybody trzeba zwrocic, zeby byl kod taki sam (teraz jest 200)
         return ResponseEntity.status(ex.getHttpStatus()).body(new ErrorResponse("Error while connecting to weather client API.", ex.getMessage(), ex.getHttpStatus()));
     }
-    @ExceptionHandler(BlankCityName.class)
-    public ResponseEntity<ErrorResponse> handleBlankCityName(BlankCityName ex) {
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException ex) {
         log.error("Error while user entered empty city name", ex);
-        // entitybody trzeba zwrocic, zeby byl kod taki sam (teraz jest 200)
-        return ResponseEntity.status(ex.getHttpStatus()).body(new ErrorResponse("Error while user entered empty city name", ex.getMessage(), ex.getHttpStatus()));
+        return ResponseEntity.status(400).body(new ErrorResponse("Error while user entered empty city name", ex.getMessage(), 400));
     }
 }
 

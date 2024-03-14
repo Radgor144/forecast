@@ -3,6 +3,7 @@ package com.Forecast.Forecast.weather;
 import com.Forecast.Forecast.weather.exceptions.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -30,6 +31,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 public class ErrorTest {
 
     public static final String URL = "/VisualCrossingWebServices/rest/services/timeline/XXX?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
+    public static final String URL_BLANK_CITY = "/VisualCrossingWebServices/rest/services/timeline/%20?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY";
     public static final String ERROR_MESSAGE = "Error while connecting to weather client API.";
     private static final List<Integer> ACCEPTED_CODES = List.of(400, 401, 404, 429, 502);
     @Autowired
@@ -71,6 +73,31 @@ public class ErrorTest {
                 .uri("/forecast/XXX")
                 .exchange()
                 .expectStatus().isEqualTo(HTTPCode)
+                .expectBody(ErrorResponse.class);
+
+        //Then
+        result
+                .isEqualTo(errorResponse);
+    }
+
+    @Test
+    public void getConstraintViolationException() {
+        //given
+        ErrorResponse errorResponse = new ErrorResponse("Error while user entered empty city name", "getWeatherData.city: nie może być odstępem", 400);
+
+        stubFor(get(urlEqualTo(URL_BLANK_CITY))
+                .willReturn(aResponse()
+                        .withStatus(400)
+                        .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+                        .withBody("getWeatherData.city: nie może być odstępem"))
+        );
+
+        //when
+        var result = webTestClient
+                .get()
+                .uri("/forecast/%20")
+                .exchange()
+                .expectStatus().isEqualTo(400)
                 .expectBody(ErrorResponse.class);
 
         //Then

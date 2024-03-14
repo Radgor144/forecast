@@ -1,15 +1,13 @@
 package com.Forecast.Forecast.weather;
 
 import com.Forecast.Forecast.weather.data.WeatherData;
-import com.Forecast.Forecast.weather.exceptions.BlankCityName;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,10 +21,6 @@ public class ForecastController {
 //   TODO: ogarnąć, żeby ten validator działał na poziomie controllera pusty string podany w paramaetrze wywowałania z postamana
 //powinien byc odrzucany na wyższym poziomie
     public WeatherData getWeatherData(@PathVariable @Valid @NotBlank String city) {
-
-        if (city.isBlank() || city.isEmpty()) {
-            throw new BlankCityName("Error while user entered empty city name");
-        }
         return weatherService.getWeatherData(city);
     }
 
