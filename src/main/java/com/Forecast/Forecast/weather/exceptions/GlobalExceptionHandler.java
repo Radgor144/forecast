@@ -1,17 +1,23 @@
 package com.Forecast.Forecast.weather.exceptions;
 
-import org.springframework.http.HttpStatus;
+import jakarta.validation.ConstraintViolationException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
-
-    @ExceptionHandler(WeatherDataNotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleWeatherDataNotFoundException(WeatherDataNotFoundException ex) {
-        return new ErrorResponse(ex.getMessage(), "Weather data not found", HttpStatus.NOT_FOUND.value());
+@Slf4j
+public class GlobalExceptionHandler extends RuntimeException {
+    @ExceptionHandler(CustomHttpException.class)
+    public ResponseEntity<ErrorResponse> handleCustomHttpException(CustomHttpException ex) {
+        log.error("Error while connecting to weather api", ex);
+        return ResponseEntity.status(ex.getHttpStatus()).body(new ErrorResponse("Error while connecting to weather client API.", ex.getMessage(), ex.getHttpStatus()));
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException ex) {
+        log.error("Error while user entered empty city name", ex);
+        return ResponseEntity.status(400).body(new ErrorResponse("Error while user entered empty city name", ex.getMessage(), 400));
     }
 }
 

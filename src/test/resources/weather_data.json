@@ -1,0 +1,616 @@
+
+  {
+    "resolvedAddress": "Kraków, Woj. Małopolskie, Polska",
+    "days": [
+      {
+        "datetime": "2024-02-16",
+        "hours": [
+          {
+            "datetime": "00:00:00",
+            "temp": 3.0,
+            "cloudcover": 88.0,
+            "precipprob": 0.0,
+            "humidity": 93.25,
+            "preciptype": null
+          },
+          {
+            "datetime": "01:00:00",
+            "temp": 1.0,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 99.89,
+            "preciptype": null
+          },
+          {
+            "datetime": "02:00:00",
+            "temp": 2.0,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 93.09,
+            "preciptype": null
+          },
+          {
+            "datetime": "03:00:00",
+            "temp": 0.1,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 92.87,
+            "preciptype": null
+          },
+          {
+            "datetime": "04:00:00",
+            "temp": 1.0,
+            "cloudcover": 91.9,
+            "precipprob": 0.0,
+            "humidity": 99.89,
+            "preciptype": null
+          },
+          {
+            "datetime": "05:00:00",
+            "temp": 0.0,
+            "cloudcover": 68.8,
+            "precipprob": 0.0,
+            "humidity": 92.98,
+            "preciptype": null
+          },
+          {
+            "datetime": "06:00:00",
+            "temp": 1.0,
+            "cloudcover": 32.0,
+            "precipprob": 0.0,
+            "humidity": 93.03,
+            "preciptype": null
+          },
+          {
+            "datetime": "07:00:00",
+            "temp": 0.0,
+            "cloudcover": 38.5,
+            "precipprob": 0.0,
+            "humidity": 99.89,
+            "preciptype": null
+          },
+          {
+            "datetime": "08:00:00",
+            "temp": 2.0,
+            "cloudcover": 26.3,
+            "precipprob": 0.0,
+            "humidity": 93.09,
+            "preciptype": null
+          },
+          {
+            "datetime": "09:00:00",
+            "temp": 4.0,
+            "cloudcover": 0.2,
+            "precipprob": 0.0,
+            "humidity": 92.99,
+            "preciptype": null
+          },
+          {
+            "datetime": "10:00:00",
+            "temp": 7.0,
+            "cloudcover": 1.5,
+            "precipprob": 0.0,
+            "humidity": 81.04,
+            "preciptype": null
+          },
+          {
+            "datetime": "11:00:00",
+            "temp": 10.0,
+            "cloudcover": 4.7,
+            "precipprob": 0.0,
+            "humidity": 66.14,
+            "preciptype": null
+          },
+          {
+            "datetime": "12:00:00",
+            "temp": 12.0,
+            "cloudcover": 6.4,
+            "precipprob": 0.0,
+            "humidity": 62.17,
+            "preciptype": null
+          },
+          {
+            "datetime": "13:00:00",
+            "temp": 14.0,
+            "cloudcover": 1.7,
+            "precipprob": 0.0,
+            "humidity": 54.55,
+            "preciptype": null
+          },
+          {
+            "datetime": "14:00:00",
+            "temp": 12.6,
+            "cloudcover": 0.0,
+            "precipprob": 0.0,
+            "humidity": 65.02,
+            "preciptype": null
+          },
+          {
+            "datetime": "15:00:00",
+            "temp": 12.8,
+            "cloudcover": 0.0,
+            "precipprob": 0.0,
+            "humidity": 65.52,
+            "preciptype": null
+          },
+          {
+            "datetime": "16:00:00",
+            "temp": 12.2,
+            "cloudcover": 0.0,
+            "precipprob": 0.0,
+            "humidity": 70.53,
+            "preciptype": null
+          },
+          {
+            "datetime": "17:00:00",
+            "temp": 10.5,
+            "cloudcover": 0.0,
+            "precipprob": 0.0,
+            "humidity": 78.39,
+            "preciptype": null
+          },
+          {
+            "datetime": "18:00:00",
+            "temp": 8.8,
+            "cloudcover": 0.0,
+            "precipprob": 0.0,
+            "humidity": 84.32,
+            "preciptype": null
+          },
+          {
+            "datetime": "19:00:00",
+            "temp": 7.6,
+            "cloudcover": 1.6,
+            "precipprob": 0.0,
+            "humidity": 87.76,
+            "preciptype": null
+          },
+          {
+            "datetime": "20:00:00",
+            "temp": 6.8,
+            "cloudcover": 7.5,
+            "precipprob": 0.0,
+            "humidity": 88.3,
+            "preciptype": null
+          },
+          {
+            "datetime": "21:00:00",
+            "temp": 6.2,
+            "cloudcover": 13.1,
+            "precipprob": 0.0,
+            "humidity": 88.24,
+            "preciptype": null
+          },
+          {
+            "datetime": "22:00:00",
+            "temp": 5.7,
+            "cloudcover": 2.8,
+            "precipprob": 0.0,
+            "humidity": 88.2,
+            "preciptype": null
+          },
+          {
+            "datetime": "23:00:00",
+            "temp": 5.1,
+            "cloudcover": 17.3,
+            "precipprob": 0.0,
+            "humidity": 88.77,
+            "preciptype": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resolvedAddress": "Szczecin, Woj. Zachodniopomorskie, Polska",
+    "days": [
+      {
+        "datetime": "2024-02-16",
+        "hours": [
+          {
+            "datetime": "00:00:00",
+            "temp": 10.8,
+            "cloudcover": 90.4,
+            "precipprob": 0.0,
+            "humidity": 94.8,
+            "preciptype": null
+          },
+          {
+            "datetime": "01:00:00",
+            "temp": 9.8,
+            "cloudcover": 90.4,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "02:00:00",
+            "temp": 9.8,
+            "cloudcover": 90.4,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "03:00:00",
+            "temp": 9.8,
+            "cloudcover": 90.4,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "04:00:00",
+            "temp": 9.8,
+            "cloudcover": 40.0,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "05:00:00",
+            "temp": 9.8,
+            "cloudcover": 50.0,
+            "precipprob": 0.0,
+            "humidity": 94.76,
+            "preciptype": null
+          },
+          {
+            "datetime": "06:00:00",
+            "temp": 9.0,
+            "cloudcover": 82.6,
+            "precipprob": 0.0,
+            "humidity": 94.73,
+            "preciptype": null
+          },
+          {
+            "datetime": "07:00:00",
+            "temp": 8.8,
+            "cloudcover": 25.0,
+            "precipprob": 0.0,
+            "humidity": 94.72,
+            "preciptype": null
+          },
+          {
+            "datetime": "08:00:00",
+            "temp": 8.8,
+            "cloudcover": 88.0,
+            "precipprob": 0.0,
+            "humidity": 93.44,
+            "preciptype": null
+          },
+          {
+            "datetime": "09:00:00",
+            "temp": 8.8,
+            "cloudcover": 98.0,
+            "precipprob": 0.0,
+            "humidity": 93.44,
+            "preciptype": null
+          },
+          {
+            "datetime": "10:00:00",
+            "temp": 9.8,
+            "cloudcover": 83.4,
+            "precipprob": 0.0,
+            "humidity": 87.36,
+            "preciptype": null
+          },
+          {
+            "datetime": "11:00:00",
+            "temp": 10.8,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 82.83,
+            "preciptype": null
+          },
+          {
+            "datetime": "12:00:00",
+            "temp": 11.8,
+            "cloudcover": 99.9,
+            "precipprob": 0.0,
+            "humidity": 82.96,
+            "preciptype": null
+          },
+          {
+            "datetime": "13:00:00",
+            "temp": 12.6,
+            "cloudcover": 99.2,
+            "precipprob": 0.0,
+            "humidity": 77.65,
+            "preciptype": null
+          },
+          {
+            "datetime": "14:00:00",
+            "temp": 12.9,
+            "cloudcover": 91.8,
+            "precipprob": 0.0,
+            "humidity": 79.28,
+            "preciptype": null
+          },
+          {
+            "datetime": "15:00:00",
+            "temp": 13.1,
+            "cloudcover": 77.2,
+            "precipprob": 0.0,
+            "humidity": 78.78,
+            "preciptype": null
+          },
+          {
+            "datetime": "16:00:00",
+            "temp": 12.6,
+            "cloudcover": 61.2,
+            "precipprob": 0.0,
+            "humidity": 81.95,
+            "preciptype": null
+          },
+          {
+            "datetime": "17:00:00",
+            "temp": 11.6,
+            "cloudcover": 76.1,
+            "precipprob": 0.0,
+            "humidity": 87.53,
+            "preciptype": null
+          },
+          {
+            "datetime": "18:00:00",
+            "temp": 11.2,
+            "cloudcover": 96.1,
+            "precipprob": 0.0,
+            "humidity": 89.27,
+            "preciptype": null
+          },
+          {
+            "datetime": "19:00:00",
+            "temp": 10.9,
+            "cloudcover": 95.3,
+            "precipprob": 0.0,
+            "humidity": 92.3,
+            "preciptype": null
+          },
+          {
+            "datetime": "20:00:00",
+            "temp": 11.0,
+            "cloudcover": 100.0,
+            "precipprob": 83.9,
+            "humidity": 92.93,
+            "preciptype": [
+              "rain"
+            ]
+          },
+          {
+            "datetime": "21:00:00",
+            "temp": 11.2,
+            "cloudcover": 100.0,
+            "precipprob": 83.9,
+            "humidity": 94.19,
+            "preciptype": [
+              "rain"
+            ]
+          },
+          {
+            "datetime": "22:00:00",
+            "temp": 11.6,
+            "cloudcover": 100.0,
+            "precipprob": 83.9,
+            "humidity": 93.58,
+            "preciptype": [
+              "rain"
+            ]
+          },
+          {
+            "datetime": "23:00:00",
+            "temp": 11.7,
+            "cloudcover": 100.0,
+            "precipprob": 83.9,
+            "humidity": 94.84,
+            "preciptype": [
+              "rain"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "resolvedAddress": "Poznań, Woj. Wielkopolskie, Polska",
+    "days": [
+      {
+        "datetime": "2024-02-16",
+        "hours": [
+          {
+            "datetime": "00:00:00",
+            "temp": 9.0,
+            "cloudcover": 88.0,
+            "precipprob": 0.0,
+            "humidity": 93.45,
+            "preciptype": null
+          },
+          {
+            "datetime": "01:00:00",
+            "temp": 9.0,
+            "cloudcover": 25.0,
+            "precipprob": 0.0,
+            "humidity": 93.45,
+            "preciptype": null
+          },
+          {
+            "datetime": "02:00:00",
+            "temp": 9.0,
+            "cloudcover": 77.4,
+            "precipprob": 0.0,
+            "humidity": 93.45,
+            "preciptype": null
+          },
+          {
+            "datetime": "03:00:00",
+            "temp": 7.0,
+            "cloudcover": 87.1,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "04:00:00",
+            "temp": 8.0,
+            "cloudcover": 77.2,
+            "precipprob": 0.0,
+            "humidity": 93.4,
+            "preciptype": null
+          },
+          {
+            "datetime": "05:00:00",
+            "temp": 8.0,
+            "cloudcover": 70.9,
+            "precipprob": 0.0,
+            "humidity": 93.4,
+            "preciptype": null
+          },
+          {
+            "datetime": "06:00:00",
+            "temp": 7.0,
+            "cloudcover": 67.0,
+            "precipprob": 0.0,
+            "humidity": 93.35,
+            "preciptype": null
+          },
+          {
+            "datetime": "07:00:00",
+            "temp": 6.0,
+            "cloudcover": 69.4,
+            "precipprob": 0.0,
+            "humidity": 93.3,
+            "preciptype": null
+          },
+          {
+            "datetime": "08:00:00",
+            "temp": 6.0,
+            "cloudcover": 75.6,
+            "precipprob": 0.0,
+            "humidity": 100.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "09:00:00",
+            "temp": 9.0,
+            "cloudcover": 36.0,
+            "precipprob": 0.0,
+            "humidity": 81.48,
+            "preciptype": null
+          },
+          {
+            "datetime": "10:00:00",
+            "temp": 11.0,
+            "cloudcover": 68.4,
+            "precipprob": 0.0,
+            "humidity": 76.35,
+            "preciptype": null
+          },
+          {
+            "datetime": "11:00:00",
+            "temp": 12.0,
+            "cloudcover": 72.5,
+            "precipprob": 0.0,
+            "humidity": 66.71,
+            "preciptype": null
+          },
+          {
+            "datetime": "12:00:00",
+            "temp": 11.5,
+            "cloudcover": 96.5,
+            "precipprob": 0.0,
+            "humidity": 75.39,
+            "preciptype": null
+          },
+          {
+            "datetime": "13:00:00",
+            "temp": 12.2,
+            "cloudcover": 98.8,
+            "precipprob": 0.0,
+            "humidity": 71.01,
+            "preciptype": null
+          },
+          {
+            "datetime": "14:00:00",
+            "temp": 12.4,
+            "cloudcover": 98.3,
+            "precipprob": 0.0,
+            "humidity": 71.54,
+            "preciptype": null
+          },
+          {
+            "datetime": "15:00:00",
+            "temp": 12.3,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 74.0,
+            "preciptype": null
+          },
+          {
+            "datetime": "16:00:00",
+            "temp": 11.8,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 78.59,
+            "preciptype": null
+          },
+          {
+            "datetime": "17:00:00",
+            "temp": 10.8,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 84.54,
+            "preciptype": null
+          },
+          {
+            "datetime": "18:00:00",
+            "temp": 10.1,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 86.8,
+            "preciptype": null
+          },
+          {
+            "datetime": "19:00:00",
+            "temp": 9.8,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 89.03,
+            "preciptype": null
+          },
+          {
+            "datetime": "20:00:00",
+            "temp": 9.3,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 91.84,
+            "preciptype": null
+          },
+          {
+            "datetime": "21:00:00",
+            "temp": 8.9,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 94.08,
+            "preciptype": null
+          },
+          {
+            "datetime": "22:00:00",
+            "temp": 8.7,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 94.68,
+            "preciptype": null
+          },
+          {
+            "datetime": "23:00:00",
+            "temp": 8.5,
+            "cloudcover": 100.0,
+            "precipprob": 0.0,
+            "humidity": 95.23,
+            "preciptype": null
+          }
+        ]
+      }
+    ]
+  }
+]

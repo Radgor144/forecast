@@ -1,11 +1,14 @@
 package com.Forecast.Forecast.weather;
 
 
-import com.Forecast.Forecast.weather.data.UnitGroup;
 import com.Forecast.Forecast.weather.data.WeatherClient;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import static com.Forecast.Forecast.weather.data.WeatherConstants.INCLUDE;
+import static com.Forecast.Forecast.weather.data.WeatherConstants.UNIT_GROUP;
 
 @Service
 public class WeatherService {
@@ -19,10 +22,8 @@ public class WeatherService {
         this.weatherClient = weatherClient;
         this.weatherClientApiKey = weatherClientApiKey;
     }
-
+    @Cacheable("WeatherData")
     public WeatherData getWeatherData(String city) {
-        String include = "hours,days";
-        UnitGroup unitGroup = UnitGroup.metric;
-        return weatherClient.getWeatherData(unitGroup, include, weatherClientApiKey, city);
+        return weatherClient.getWeatherData(UNIT_GROUP, INCLUDE, weatherClientApiKey, city);
     }
 }
