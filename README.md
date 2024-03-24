@@ -10,9 +10,9 @@
 
 <a href="https://spring.io/projects/spring-boot" target="blank"> Spring Boot</a> application about forecast. The application provide user to get weather data. The application is connected to <a href="https://spring.io/projects/spring-boot" target="blank"> Weather API</a> to fetch weather data.
 
-| Method |       URL        |             Description          |
-| ------ | ---------------- | ---------------------------------|
-| `Get`  | `/forecast/city` | Receives 15 days of weather data |
+| Method |       URL        |             Description           |
+| ------ | ---------------- | --------------------------------- |
+| `Get`  | `/forecast/city` | Receives weather data for 15 days |
 
 ## Requirements <a name = "Requirements"></a>
 
