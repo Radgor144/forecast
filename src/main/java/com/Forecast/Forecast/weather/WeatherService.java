@@ -22,7 +22,7 @@ public class WeatherService {
         this.weatherClient = weatherClient;
         this.weatherClientApiKey = weatherClientApiKey;
     }
-    @Cacheable("WeatherData")
+
     public WeatherData getWeatherData(String city) {
         return weatherClient.getWeatherData(UNIT_GROUP, INCLUDE, weatherClientApiKey, city);
     }

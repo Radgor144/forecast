@@ -19,6 +19,21 @@
 - <a href="https://spring.io/projects/spring-boot" target="blank"> JDK 21 </a>
 - <a href="https://spring.io/projects/spring-boot" target="blank"> Maven 3.x </a>
 
+## How to run locally <a name = "How to run locally"></a>
+
+1. Register account on https://weather.visualcrossing.com
+2. Login to your account and copy api-key from: https://www.visualcrossing.com/account
+![img.png](img.png)
+3. Create application-local.yml with structure like:
+   ``` yaml 
+   weather:
+      client:
+        api-key: changeMe
+   ```
+4. Replace changeMe with api-key from 
+5. Set profile to local in configuration
+![img_1.png](img_1.png)
+
 ## Technologies <a name = "Technologies"></a>
 
 ### Project Created with:
