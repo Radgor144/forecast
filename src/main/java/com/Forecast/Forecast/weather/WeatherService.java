@@ -4,7 +4,6 @@ package com.Forecast.Forecast.weather;
 import com.Forecast.Forecast.weather.data.WeatherClient;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import static com.Forecast.Forecast.weather.data.WeatherConstants.INCLUDE;
