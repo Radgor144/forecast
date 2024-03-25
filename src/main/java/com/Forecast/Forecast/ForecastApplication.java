@@ -9,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableFeignClients
 @EnableWebMvc
-@EnableCaching
 public class ForecastApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ForecastApplication.class, args);
