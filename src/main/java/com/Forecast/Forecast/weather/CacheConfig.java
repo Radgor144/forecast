@@ -20,7 +20,6 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
-
         return new ConcurrentMapCacheManager(WEATHER_DATA);
     }
 
@@ -29,4 +28,5 @@ public class CacheConfig {
     public void reportCacheEvict() {
         log.info("Refresh Cache");
     }
+
 }
