@@ -16,7 +16,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Slf4j
 public class CacheConfig {
 
-    public static final String WEATHER_DATA = "WeatherData";
+    private static final String WEATHER_DATA = "WeatherData";
 
     @Bean
     public CacheManager cacheManager() {
