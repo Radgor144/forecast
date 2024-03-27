@@ -2,17 +2,18 @@ package com.Forecast.Forecast.cache;
 
 import com.Forecast.Forecast.util.JsonFileReader;
 import com.Forecast.Forecast.util.StubUtil;
+import com.Forecast.Forecast.weather.CacheConfig;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @AutoConfigureWebTestClient
 public class CachingIntegrationTest {
 
+    public static final String CITY = "krakow";
+
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -34,35 +37,56 @@ public class CachingIntegrationTest {
     private WebTestClient webTestClient;
 
     @Autowired
-    CacheManager manager;
+    private CacheConfig cacheConfig;
+
+    private WeatherData expectedWeatherData;
+
+    @BeforeEach
+    void setUp() throws IOException {
+        // given
+        expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
+        StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData);
+
+        //when
+        WebTestClient.ResponseSpec firstRequestResult = webTestClient
+                .get()
+                .uri("/forecast/" + CITY)
+                .exchange();
+    }
 
     @Test
     void getWeatherData_ReturnsFromCache() throws IOException {
-        // given
-        String city = "krakow";
-        WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/krakow.json", WeatherData.class);
-
-        StubUtil.stubGetWeatherData(objectMapper, city, expectedWeatherData);
 
         // when
-        var result = webTestClient
+        var secondRequestResult = webTestClient
                 .get()
-                .uri("/forecast/" + city)
+                .uri("/forecast/" + CITY)
                 .exchange();
 
-        Cache cache = manager.getCache("WeatherData");
-        WeatherData cachedWeatherData = (WeatherData) cache.get(city).get();
+        // then
+        assertEquals(1, WireMock.getAllServeEvents().size());
+        secondRequestResult
+                .expectStatus().isOk()
+                .expectBody(WeatherData.class)
+                .isEqualTo(expectedWeatherData);
+    }
+
+    @Test
+    @DirtiesContext
+    void getWeatherData_AfterRefreshingCache() throws IOException {
+
+        cacheConfig.reportCacheEvict();
+
+        var secondRequestResult = webTestClient
+                .get()
+                .uri("/forecast/" + CITY)
+                .exchange();
 
         // then
-
-        assertEquals(expectedWeatherData, cachedWeatherData);
-
-        result
+        assertEquals(2, WireMock.getAllServeEvents().size());
+        secondRequestResult
+                .expectStatus().isOk()
                 .expectBody(WeatherData.class)
-                .consumeWith(response -> {
-                            assertEquals(cachedWeatherData, response.getResponseBody());
-                            response.getStatus().isSameCodeAs(HttpStatusCode.valueOf(200));
-                        }
-                );
+                .isEqualTo(expectedWeatherData);
     }
 }
