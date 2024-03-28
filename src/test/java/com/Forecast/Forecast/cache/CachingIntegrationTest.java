@@ -2,12 +2,11 @@ package com.Forecast.Forecast.cache;
 
 import com.Forecast.Forecast.util.JsonFileReader;
 import com.Forecast.Forecast.util.StubUtil;
-import com.Forecast.Forecast.weather.CacheConfig;
+import com.Forecast.Forecast.weather.WeatherClientCacheConfig;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -37,25 +36,13 @@ public class CachingIntegrationTest {
     private WebTestClient webTestClient;
 
     @Autowired
-    private CacheConfig cacheConfig;
-
-    private WeatherData expectedWeatherData;
-
-    @BeforeEach
-    void setUp() throws IOException {
-        // given
-        expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
-        StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData);
-
-        //when
-        WebTestClient.ResponseSpec firstRequestResult = webTestClient
-                .get()
-                .uri("/forecast/" + CITY)
-                .exchange();
-    }
+    private WeatherClientCacheConfig weatherClientCacheConfig;
 
     @Test
     void getWeatherData_ReturnsFromCache() throws IOException {
+
+        WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
+        var firstRequestResult = StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData, webTestClient);
 
         // when
         var secondRequestResult = webTestClient
@@ -75,7 +62,12 @@ public class CachingIntegrationTest {
     @DirtiesContext
     void getWeatherData_AfterRefreshingCache() throws IOException {
 
-        cacheConfig.reportCacheEvict();
+        // given
+        WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
+        var firstRequestResult = StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData, webTestClient);
+
+        //when
+        weatherClientCacheConfig.evictCache();
 
         var secondRequestResult = webTestClient
                 .get()

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -15,12 +16,17 @@ import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 @UtilityClass
 public final class StubUtil {
 
-    public static void stubGetWeatherData(ObjectMapper objectMapper, String city, WeatherData weatherData) throws JsonProcessingException {
+    public static WebTestClient.ResponseSpec stubGetWeatherData(ObjectMapper objectMapper, String city, WeatherData weatherData, WebTestClient webTestClient) throws JsonProcessingException {
         stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .withBody(objectMapper.writeValueAsString(weatherData)))
         );
+
+        return webTestClient
+                .get()
+                .uri("/forecast/" + city)
+                .exchange();
     }
 }

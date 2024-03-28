@@ -40,13 +40,8 @@ class ForecastControllerResourcesFromFileTest {
         // given
         WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, WEATHER_DATA_RESOURCE_PATH_TEMPLATE.formatted(city), WeatherData.class);
 
-        StubUtil.stubGetWeatherData(objectMapper, city, expectedWeatherData);
-
         // when
-        var result = webTestClient
-                .get()
-                .uri("/forecast/" + city)
-                .exchange();
+        var result = StubUtil.stubGetWeatherData(objectMapper, city, expectedWeatherData, webTestClient);
 
         // then
         result
