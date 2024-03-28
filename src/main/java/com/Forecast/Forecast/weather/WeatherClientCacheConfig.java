@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 @EnableCaching
 @EnableScheduling
 @Slf4j
-public class CacheConfig {
+public class WeatherClientCacheConfig {
 
     private static final String WEATHER_DATA = "WeatherData";
 
@@ -25,7 +25,7 @@ public class CacheConfig {
 
     @CacheEvict(allEntries = true, value = {WEATHER_DATA})
     @Scheduled(fixedDelay = 10 * 60 * 1000) // refresh cache every 10 minutes
-    public void reportCacheEvict() {
+    public void evictCache() {
         log.info("Refresh Cache");
     }
 
