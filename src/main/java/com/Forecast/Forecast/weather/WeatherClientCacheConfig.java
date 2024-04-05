@@ -16,17 +16,18 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Slf4j
 public class WeatherClientCacheConfig {
 
-    private static final String WEATHER_DATA = "WeatherData";
+    public static final String CacheName = "WeatherData";
 
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager(WEATHER_DATA);
+        return new ConcurrentMapCacheManager(CacheName);
     }
 
-    @CacheEvict(allEntries = true, value = {WEATHER_DATA})
+    @CacheEvict(allEntries = true, value = {CacheName})
     @Scheduled(fixedDelay = 10 * 60 * 1000) // refresh cache every 10 minutes
     public void evictCache() {
         log.info("Refresh Cache");
     }
+
 
 }
