@@ -1,3 +1,12 @@
+
 weather:
   client:
     api-key: FAKE_API_KEY
+
+cors:
+  allowedApi: http://localhost:[*]
+  allowedMethods: GET,OPTIONS
+  allowedHeaders: "*"
+  allowCredentials: false
+  exposedHeaders: "*"
+  maxAge: 36000

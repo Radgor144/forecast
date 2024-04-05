@@ -1,5 +1,6 @@
 package com.Forecast.Forecast.weather;
 
+import com.Forecast.Forecast.util.StubUtil;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import com.Forecast.Forecast.weather.fixtures.WeatherDataFixture;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,15 +13,11 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.stream.Stream;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import static com.Forecast.Forecast.util.RequestUtil.getForecastRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(properties =
@@ -49,18 +46,10 @@ class ForecastControllerTest {
     void happyPath(String address, String city) throws JsonProcessingException {
 //      given
         var weatherData = WeatherDataFixture.defaultWeatherData(address);
-
-        stubFor(get(urlEqualTo("/VisualCrossingWebServices/rest/services/timeline/" + city + "?unitGroup=metric&include=hours%2Cdays&key=FAKE_API_KEY"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-                        .withBody(objectMapper.writeValueAsString(weatherData)))
-        );
+        StubUtil.stubGetWeatherData(objectMapper, city, weatherData);
 //      when
-        var result = webTestClient
-                .get()
-                .uri("/forecast/" + city)
-                .exchange();
+        var result = getForecastRequest(webTestClient, city);
+
 //      then
         result
                 .expectBody(WeatherData.class)

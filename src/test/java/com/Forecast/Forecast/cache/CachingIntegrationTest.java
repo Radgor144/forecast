@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.io.IOException;
 
+import static com.Forecast.Forecast.util.RequestUtil.getForecastRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Slf4j
@@ -40,15 +40,12 @@ public class CachingIntegrationTest {
 
     @Test
     void getWeatherData_ReturnsFromCache() throws IOException {
-
+        // given
         WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
-        var firstRequestResult = StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData, webTestClient);
+        StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData);
 
         // when
-        var secondRequestResult = webTestClient
-                .get()
-                .uri("/forecast/" + CITY)
-                .exchange();
+        var secondRequestResult = getForecastRequest(webTestClient, CITY);
 
         // then
         assertEquals(1, WireMock.getAllServeEvents().size());
@@ -59,20 +56,16 @@ public class CachingIntegrationTest {
     }
 
     @Test
-    @DirtiesContext
     void getWeatherData_AfterRefreshingCache() throws IOException {
 
         // given
         WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, "src/test/resources/" + CITY + ".json", WeatherData.class);
-        var firstRequestResult = StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData, webTestClient);
+        StubUtil.stubGetWeatherData(objectMapper, CITY, expectedWeatherData);
 
         //when
         weatherClientCacheConfig.evictCache();
 
-        var secondRequestResult = webTestClient
-                .get()
-                .uri("/forecast/" + CITY)
-                .exchange();
+        var secondRequestResult = getForecastRequest(webTestClient, CITY);
 
         // then
         assertEquals(2, WireMock.getAllServeEvents().size());

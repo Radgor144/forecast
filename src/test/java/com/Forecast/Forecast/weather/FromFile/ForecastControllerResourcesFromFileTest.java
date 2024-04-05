@@ -17,6 +17,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import static com.Forecast.Forecast.util.RequestUtil.getForecastRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(properties =
@@ -39,9 +40,9 @@ class ForecastControllerResourcesFromFileTest {
     void happyPath(String name, String city) throws IOException {
         // given
         WeatherData expectedWeatherData = JsonFileReader.readJson(objectMapper, WEATHER_DATA_RESOURCE_PATH_TEMPLATE.formatted(city), WeatherData.class);
-
+        StubUtil.stubGetWeatherData(objectMapper, city, expectedWeatherData);
         // when
-        var result = StubUtil.stubGetWeatherData(objectMapper, city, expectedWeatherData, webTestClient);
+        var result = getForecastRequest(webTestClient, city);
 
         // then
         result
