@@ -2,7 +2,7 @@ package com.Forecast.Forecast.cache;
 
 import com.Forecast.Forecast.util.JsonFileReader;
 import com.Forecast.Forecast.util.StubUtil;
-import com.Forecast.Forecast.weather.WeatherClientCacheConfig;
+import com.Forecast.Forecast.weather.config.WeatherClientCacheConfig;
 import com.Forecast.Forecast.weather.data.WeatherData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;

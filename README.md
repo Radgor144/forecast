@@ -39,19 +39,19 @@
 ### Project Created with:
 
 - **Java 21** - The core programming language for building the project.
-- **Spring boot** - Facilitates the development of robust and scalable applications, providing a comprehensive framework for Java development.
+- **Spring boot** - It supports the rapid development of microservices-based applications and includes built-in features for configuration, dependency management, and application bootstrapping.
 
 ### Integration:
 
-- **feign** - A declarative web service client used for simplifying API integration.
+- **feign** - declarative web service client. Simplifies communication between services by enabling easy invocation of remote services from application code. It makes writing web service clients easier.
 
 ### Documentation:
-- **swagger** - A tool for designing, building, documenting, and consuming RESTful web services.
+- **swagger** - Auto-generate API documentation for better interactivity, comprehension and testing of API features.
 
 ### Tests:
-- **JUnit** - A widely used testing framework for Java applications.
-- **Mockito** - A mocking framework for creating and configuring mock objects.
-- **wiremock** - Library for simulating HTTP-based services during testing.
+- **JUnit** - Unit testing was implemented to check the correctness of individual code fragments in isolation, enabling faster error detection and facilitating refactoring.
+- **Mockito** - It allows you to simulate the behaviour of real objects in a controlled test environment, making it easier to test code in isolation and verify interactions between objects.
+- **wiremock** - WireMock enables the creation of mock HTTP servers that can be used to test applications that communicate using the HTTP protocol. It is used to create dummy servers that can pretend to be real services. With WireMock, it is possible to create pre-defined responses to specific HTTP requests.
 
 ### Build tools:
-- **Maven** - A build automation tool for managing dependencies and building Java projects.
+- **Maven** - Tool for managing dependencies, building, and managing projects.
