@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.retry.annotation.Backoff;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +24,9 @@ public class ForecastController {
 
     // da sie znalezc miasto po kodzie pocztowym!
     @Cacheable(cacheNames = CACHENAME)
-    @Retryable(maxAttempts=10, backoff=@Backoff(delay=1000, maxDelay=5000))
     @GetMapping("/forecast/{city}")
     public WeatherData getWeatherData(@PathVariable @Valid @NotBlank @Size(min = 2, max = 40) String city) {
-        log.info("input city: {}", city);
+//        log.info("input city: {}", city);
         return weatherService.getWeatherData(city);
     }
 
