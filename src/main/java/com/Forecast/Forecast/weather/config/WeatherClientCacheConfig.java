@@ -1,4 +1,4 @@
-package com.Forecast.Forecast.weather;
+package com.Forecast.Forecast.weather.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
@@ -16,14 +16,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 @Slf4j
 public class WeatherClientCacheConfig {
 
-    public static final String CacheName = "WeatherData";
+    public static final String CACHENAME = "WeatherData";
 
     @Bean
     public CacheManager cacheManager() {
-        return new ConcurrentMapCacheManager(CacheName);
+        return new ConcurrentMapCacheManager(CACHENAME);
     }
 
-    @CacheEvict(allEntries = true, value = {CacheName})
+    @CacheEvict(allEntries = true, value = {CACHENAME})
     @Scheduled(fixedDelay = 10 * 60 * 1000) // refresh cache every 10 minutes
     public void evictCache() {
         log.info("Refresh Cache");

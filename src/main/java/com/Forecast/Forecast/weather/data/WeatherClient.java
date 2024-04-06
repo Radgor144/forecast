@@ -1,5 +1,7 @@
 package com.Forecast.Forecast.weather.data;
 
+
+import com.Forecast.Forecast.weather.config.WeatherClientConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
