@@ -22,5 +22,6 @@ public final class StubUtil {
                         .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                         .withBody(objectMapper.writeValueAsString(weatherData)))
         );
+
     }
 }

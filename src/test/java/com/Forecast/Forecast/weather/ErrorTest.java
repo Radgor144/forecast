@@ -15,6 +15,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.stream.Stream;
 
+import static com.Forecast.Forecast.util.RequestUtil.getForecastRequest;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
@@ -51,10 +52,7 @@ public class ErrorTest {
         );
 
         //when
-        var result = webTestClient
-                .get()
-                .uri("/forecast/XXX")
-                .exchange();
+        var result = getForecastRequest(webTestClient, "XXX");
 
         //then
         result
@@ -68,10 +66,7 @@ public class ErrorTest {
     public void shouldReturn400ErrorWhenInvalidParameterPassedToGetWeather(String uri, String message, String reason) {
         //given
         //when
-        var result = webTestClient
-                .get()
-                .uri("/forecast/" + uri)
-                .exchange();
+        var result = getForecastRequest(webTestClient, uri);
 
         //then
         result

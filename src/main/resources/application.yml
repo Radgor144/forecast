@@ -5,6 +5,15 @@ spring:
         config:
           weather-client:
             url: https://weather.visualcrossing.com
+cors:
+  allowedApi: http://localhost:[*]
+  allowedMethods: GET,OPTIONS
+  allowedHeaders: "*"
+  allowCredentials: false
+  exposedHeaders: "*"
+  maxAge: 36000
+
+
 
 weather:
   client:
