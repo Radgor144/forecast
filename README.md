@@ -55,3 +55,8 @@
 
 ### Build tools:
 - **Maven** - Tool for managing dependencies, building, and managing projects.
+
+### Additional features:
+- **CORS** - Configured to allow secure cross-origin requests.
+- **Retryer** - Implemented to enhance robustness by automatically retrying failed HTTP requests.
+- **Cache** - Used to improve performance by storing frequently accessed data.
